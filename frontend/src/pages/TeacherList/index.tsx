@@ -80,9 +80,9 @@ function TeacherList() {
         </PageHeader>
 
         <main>
-          {teachers.map((teacher: Teacher) => (
+          {teachers.map((teacher: Teacher) => 
             <TeacherItem key={teacher.id} teacher={teacher} />
-          ))}
+          )}
         </main>
       </div>
     </>
