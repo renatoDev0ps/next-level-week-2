@@ -3,7 +3,7 @@ import {Request, Response} from 'express';
 import db from '../database/connection';
 import convertHourToMinutes from '../utils/convertHourToMinutes';
 
-interface scheduleItem {
+interface ScheduleItem {
   week_day: number;
   from: string;
   to: string;
@@ -23,7 +23,7 @@ export default class ClassesController {
       });
     }
 
-    const timeInMInutes = convertHourToMinutes(time);
+    const timeInMinutes = convertHourToMinutes(time);
 
     const classes = await db('classes')
       .whereExists(function() {
@@ -31,11 +31,11 @@ export default class ClassesController {
           .from('class_schedule')
           .whereRaw('`class_schedule`.`class_id` = `classes`.`id`')
           .whereRaw('`class_schedule`.`week_day` = ??', [Number(week_day)])
-          .whereRaw('`class_schedule`.`from` <= ??', [Number(timeInMInutes)])
-          .whereRaw('`class_schedule`.`to` > ??', [Number(timeInMInutes)])
+          .whereRaw('`class_schedule`.`from` <= ??', [Number(timeInMinutes)])
+          .whereRaw('`class_schedule`.`to` > ??', [Number(timeInMinutes)])
       })
       .where('classes.subject', '=', subject)
-      .join('users', 'classes.user_id', '=', 'user_id')
+      .join('users', 'classes.user_id', '=', 'users.id')
       .select(['classes.*', 'users.*']);
 
     return res.status(202).json(classes);
@@ -55,24 +55,24 @@ export default class ClassesController {
     const trx = await db.transaction();
   
     try {
-      const searchUserId = await trx('users').insert({
+      const insertedUsersIds = await trx('users').insert({
         name,
         avatar,
         whatsapp,
         bio
       });
     
-      const user_id = searchUserId[0];
+      const user_id = insertedUsersIds[0];
     
-      const searchClasseId = await trx('classes').insert({
+      const insertedClassesIds = await trx('classes').insert({
         subject,
         cost,
-        user_id
+        user_id,
       });
     
-      const class_id = searchClasseId[0];
+      const class_id = insertedClassesIds[0];
     
-      const classSchedule = schedule.map((scheduleItem: scheduleItem) => {
+      const classSchedule = schedule.map((scheduleItem: ScheduleItem) => {
         return {
           class_id,
           week_day: scheduleItem.week_day,
