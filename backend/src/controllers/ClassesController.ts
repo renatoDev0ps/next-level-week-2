@@ -35,15 +35,21 @@ export default class ClassesController {
           .whereRaw('`class_schedule`.`to` > ??', [Number(timeInMinutes)])
       })
       .where('classes.subject', '=', subject)
-      .join('users', 'classes.user_id', '=', 'users.id')
-      .select(['classes.*', 'users.*']);
+      .join('usersinfo', 'classes.userinfo_id', '=', 'usersinfo.id')
+      .join('users', 'usersinfo.user_id', '=', 'users.id')
+      .select([
+        'classes.*',
+        'usersinfo.*',
+        'users.name',
+        'users.surname',
+        'users.email'
+      ]);
 
     return res.status(202).json(classes);
   }
 
   async create(req: Request, res: Response) {
     const {
-      name,
       avatar,
       whatsapp,
       bio,
@@ -51,27 +57,31 @@ export default class ClassesController {
       cost,
       schedule
     } = req.body;
-  
+
+    console.log(req.userId);
+
+    const { id } = req.userId;
+
     const trx = await db.transaction();
-  
+
     try {
-      const insertedUsersIds = await trx('users').insert({
-        name,
+      const insertedUsersIds = await trx('usersinfo').insert({
+        user_id: id,
         avatar,
         whatsapp,
         bio
       });
-    
-      const user_id = insertedUsersIds[0];
-    
+
+      const userinfo_id = insertedUsersIds[0];
+
       const insertedClassesIds = await trx('classes').insert({
         subject,
         cost,
-        user_id,
+        userinfo_id,
       });
-    
+
       const class_id = insertedClassesIds[0];
-    
+
       const classSchedule = schedule.map((scheduleItem: ScheduleItem) => {
         return {
           class_id,
@@ -80,15 +90,15 @@ export default class ClassesController {
           to: convertHourToMinutes(scheduleItem.to)
         };
       });
-    
+
       await trx('class_schedule').insert(classSchedule);
-    
+
       await trx.commit();
-    
+
       return res.status(201).send();
     } catch (err) {
       await trx.rollback();
-  
+
       return res.status(400).json({
         error: 'Unexpected error while creating new class.'
       });
