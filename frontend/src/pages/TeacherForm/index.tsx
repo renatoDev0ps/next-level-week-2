@@ -47,7 +47,7 @@ function TeacherForm() {
     }).then(() => {
       alert('Cadastro realizado com sucesso!')
 
-      history.push('/');
+      history.push('/home');
     }).catch(() => {
       alert('Erro no cadastro!')
     });
@@ -68,7 +68,7 @@ function TeacherForm() {
   return (
     <>
       <div id="page-teacher-form" className="container">
-        <PageHeader 
+        <PageHeader
           title="Que incrível que você quer dar aulas."
           description="O primeiro passo é preencher este formulário de inscrição."
         />
@@ -77,26 +77,32 @@ function TeacherForm() {
           <form onSubmit={handleCreateClass}>
             <fieldset>
               <legend>Seus dados</legend>
-              <Input 
-                name="name" 
+              <Input
+                type="text"
+                className="input-block"
+                name="name"
                 label="Nome completo"
                 value={name}
                 onChange={(e) => { setName(e.target.value) }}
               />
-              <Input 
-                name="avatar" 
+              <Input
+                type="text"
+                className="input-block"
+                name="avatar"
                 label="Avatar"
                 value={avatar}
                 onChange={(e) => { setAvatar(e.target.value) }}
               />
-              <Input 
-                name="whatsapp" 
+              <Input
+                type="text"
+                className="input-block"
+                name="whatsapp"
                 label="whatsapp"
                 value={whatsapp}
                 onChange={(e) => { setWhatsapp(e.target.value) }}
               />
-              <Textarea 
-                name="bio" 
+              <Textarea
+                name="bio"
                 label="Biografia"
                 value={bio}
                 onChange={(e) => { setBio(e.target.value) }}
@@ -105,8 +111,8 @@ function TeacherForm() {
 
             <fieldset>
               <legend>Sobre a aula</legend>
-              <Select 
-                name="subject" 
+              <Select
+                name="subject"
                 label="Matéria"
                 value={subject}
                 onChange={(e) => { setSubject(e.target.value) }}
@@ -121,11 +127,13 @@ function TeacherForm() {
                   { value: 'Gitflow', label: 'Gitflow' },
                 ]}
               />
-              <Input 
-              name="cost" 
-              label="Custo da sua hora aula"
-              value={cost}
-              onChange={(e) => { setCost(e.target.value) }}
+              <Input
+                type="text"
+                className="input-block"
+                name="cost"
+                label="Custo da sua hora aula"
+                value={cost}
+                onChange={(e) => { setCost(e.target.value) }}
               />
             </fieldset>
 
@@ -140,7 +148,7 @@ function TeacherForm() {
               {scheduleItems.map((scheduleItem, index) => (
                 <div key={scheduleItem.week_day} className="schedule-item">
                   <Select
-                    name="week-day" 
+                    name="week-day"
                     label="Dia da semana"
                     value={scheduleItem.week_day}
                     onChange={e => setScheduleItemValue(index, 'week_day', e.target.value)}
@@ -154,15 +162,19 @@ function TeacherForm() {
                       { value: '6', label: 'Sábado' },
                     ]}
                   />
-                  <Input 
-                    name="from" 
-                    label="Das" type="time"
+                  <Input
+                    type="time"
+                    className="input-block"
+                    name="from"
+                    label="Das"
                     value={scheduleItem.from}
                     onChange={e => setScheduleItemValue(index, 'from', e.target.value)}
                   />
-                  <Input 
-                    name="to" 
-                    label="Até" type="time"
+                  <Input
+                    type="time"
+                    className="input-block"
+                    name="to"
+                    label="Até"
                     value={scheduleItem.to}
                     onChange={e => setScheduleItemValue(index, 'to', e.target.value)}
                   />

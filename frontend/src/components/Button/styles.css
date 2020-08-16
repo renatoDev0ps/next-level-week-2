@@ -1,0 +1,58 @@
+.button-primary,
+.button-secondary,
+.button-success,
+.button-warning,
+.button-danger {
+  width: 100%;
+  height: 5.6rem;
+  border: 0 !important;
+  border-radius: 0.8rem;
+  outline: none;
+  font-weight: bold;
+  margin-top: 3.2rem;
+  font: 700 1.6rem Archivo;
+  color: var(--color-button-text);
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+}
+
+.button-primary {
+  background: var(--color-button-primary) !important;
+}
+
+.button-primary:hover {
+  background: var(--color-button-primary-dark) !important;
+}
+
+.button-secondary {
+  background: var(--color-button-secondary) !important;
+}
+
+.button-secondary:hover {
+  background: var(--color-button-secondary-dark) !important;
+}
+
+.button-success {
+  background: var(--color-button-success) !important;
+}
+
+.button-success:hover {
+  background: var(--color-button-success-dark) !important;
+}
+
+.button-warning {
+  background: var(--color-button-warning) !important;
+}
+
+.button-warning:hover {
+  background: var(--color-button-warning-dark) !important;
+}
+
+.button-danger {
+  background: var(--color-button-danger) !important;
+}
+
+.button-danger:hover {
+  background: var(--color-button-danger-dark) !important;
+}

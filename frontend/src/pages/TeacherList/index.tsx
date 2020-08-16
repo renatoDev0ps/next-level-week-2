@@ -35,7 +35,7 @@ function TeacherList() {
         <PageHeader title="Estes são os proffys disponíveis.">
           <form id="search-teachers" onSubmit={searchTeachers}>
             <Select
-              name="subject" 
+              name="subject"
               label="Matéria"
               value={subject}
               onChange={e => {setSubject(e.target.value)}}
@@ -51,7 +51,7 @@ function TeacherList() {
               ]}
             />
             <Select
-              name="week-day" 
+              name="week-day"
               label="Dia da semana"
               value={week_day}
               onChange={e => {setWeekDay(e.target.value)}}
@@ -65,9 +65,10 @@ function TeacherList() {
                 { value: '6', label: 'Sábado' },
               ]}
             />
-            <Input 
-              type="time" 
-              name="time" 
+            <Input
+              className="input-block"
+              type="time"
+              name="time"
               label="Hora"
               value={time}
               onChange={e => {setTime(e.target.value)}}
@@ -80,7 +81,7 @@ function TeacherList() {
         </PageHeader>
 
         <main>
-          {teachers.map((teacher: Teacher) => 
+          {teachers.map((teacher: Teacher) =>
             <TeacherItem key={teacher.id} teacher={teacher} />
           )}
         </main>

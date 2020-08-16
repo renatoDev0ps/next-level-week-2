@@ -12,13 +12,24 @@
   --color-title-in-primary: #FFFFFF;
   --color-text-in-primary: #D4C2FF;
   --color-text-title: #32264D;
-  --color-text-complement: #9C98A6;
+  --color-text-complement: #938f9c;
   --color-text-base: #6A6180;
+  --color-text-base-lighter: #7b768a;
   --color-line-in-white: #E6E6F0;
   --color-input-background: #F8F8FC;
   --color-button-text: #FFFFFF;
   --color-box-base: #FFFFFF;
   --color-box-footer: #FAFAFC;
+  --color-button-primary: #8257E5;
+  --color-button-primary-dark: #5b2fc2;
+  --color-button-secondary: #a6a0b6;
+  --color-button-secondary-dark: #898397;
+  --color-button-success: #04D361;
+  --color-button-success-dark: #0aad53;
+  --color-button-warning: #d6d308;
+  --color-button-warning-dark: #bbb80a;
+  --color-button-danger: #f51243;
+  --color-button-danger-dark: #d60c38;
 }
 
 * {

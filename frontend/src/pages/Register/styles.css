@@ -1,0 +1,66 @@
+#page-register {
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  color: var(--color-text-in-primary);
+}
+
+/* Style side */
+#page-register-side {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--color-primary);
+  background-image: url('../../assets/images/give-classes-background.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#page-register-side .logo-container img {
+  width: 32rem;
+}
+
+#page-register-side .logo-container p {
+  font-size: 2rem;
+  max-width: 22rem;
+}
+
+/* Style aside */
+#page-register-aside {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-register-aside .back-to {
+  width: 37rem;
+  margin-bottom: 5rem;
+}
+
+#page-register-aside legend {
+  width: 24rem;
+  font: 700 3.2rem Poppins;
+  color: var(--color-text-title);
+}
+
+#page-register-aside p {
+  width: 22rem;
+  color: var(--color-text-base-lighter);
+  padding: 1.4rem 0 2.4rem 0;
+}
+
+#page-register-aside fieldset {
+  background: var(--color-box-base);
+  border: none;
+  border-radius: 0.8rem;
+
+  display: flex;
+}
